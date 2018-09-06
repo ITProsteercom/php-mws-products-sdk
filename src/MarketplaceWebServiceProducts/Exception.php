@@ -1,4 +1,4 @@
-<?php namespace MWS;
+<?php namespace MWSProducts;
 
 use Exception;
 

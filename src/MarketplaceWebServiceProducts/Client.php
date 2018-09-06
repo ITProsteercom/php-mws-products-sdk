@@ -1,45 +1,45 @@
 <?php
 
-namespace MWS;
+namespace MWSProducts;
 
 use DateTime;
 use Exception;
 use InvalidArgumentException;
-use MWS\Model\MarketplaceWebServiceProducts_Model_ASINListType;
-use MWS\Model\MarketplaceWebServiceProducts_Model_FeesEstimateRequestList;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINRequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKUResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINRequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForSKURequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForSKUResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINRequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForSKURequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForSKUResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetMatchingProductForIdRequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetMatchingProductForIdResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetMatchingProductRequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetMatchingProductResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetMyFeesEstimateRequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetMyFeesEstimateResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetMyPriceForASINRequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetMyPriceForASINResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetMyPriceForSKURequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetMyPriceForSKUResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetProductCategoriesForASINRequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetProductCategoriesForASINResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetProductCategoriesForSKURequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetProductCategoriesForSKUResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetServiceStatusRequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_GetServiceStatusResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_IdListType;
-use MWS\Model\MarketplaceWebServiceProducts_Model_ListMatchingProductsRequest;
-use MWS\Model\MarketplaceWebServiceProducts_Model_ListMatchingProductsResponse;
-use MWS\Model\MarketplaceWebServiceProducts_Model_ResponseHeaderMetadata;
-use MWS\Model\MarketplaceWebServiceProducts_Model_SellerSKUListType;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_ASINListType;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_FeesEstimateRequestList;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINRequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKUResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINRequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForSKURequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForSKUResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINRequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForSKURequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForSKUResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetMatchingProductForIdRequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetMatchingProductForIdResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetMatchingProductRequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetMatchingProductResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetMyFeesEstimateRequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetMyFeesEstimateResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetMyPriceForASINRequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetMyPriceForASINResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetMyPriceForSKURequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetMyPriceForSKUResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetProductCategoriesForASINRequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetProductCategoriesForASINResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetProductCategoriesForSKURequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetProductCategoriesForSKUResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetServiceStatusRequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_GetServiceStatusResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_IdListType;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_ListMatchingProductsRequest;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_ListMatchingProductsResponse;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_ResponseHeaderMetadata;
+use MWSProducts\Model\MarketplaceWebServiceProducts_Model_SellerSKUListType;
 
 /**
  * MarketplaceWebServiceProducts_Client is an implementation of MarketplaceWebServiceProducts
@@ -235,10 +235,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      * the MarketplaceId and ASIN.
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASIN request or MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASIN object itself
-     * @see MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINRequest
      * @return MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINRequest
      */
     public function getCompetitivePricingForASIN($request)
     {
@@ -259,6 +260,9 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      * @param array $parameters
      * @return array
      * @throws \MWS\MarketplaceWebServiceProducts_Exception
+     * @throws MarketplaceWebServiceProducts_Exception
+     * @throws MarketplaceWebServiceProducts_Exception
+     * @throws MarketplaceWebServiceProducts_Exception
      */
     private function _invoke(array $parameters)
     {
@@ -685,10 +689,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      * the SellerId and SKU.
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKU request or MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKU object itself
-     * @see MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest
      * @return MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKUResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest
      */
     public function getCompetitivePricingForSKU($request)
     {
@@ -699,7 +704,7 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
         $parameters['Action'] = 'GetCompetitivePricingForSKU';
         $httpResponse = $this->_invoke($parameters);
 
-       $response = MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKUResponse::fromXML($httpResponse['ResponseBody']);
+        $response = MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKUResponse::fromXML($httpResponse['ResponseBody']);
         $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
         return $response;
     }
@@ -710,10 +715,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      * MarketplaceId and ASIN.
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASIN request or MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASIN object itself
-     * @see MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINRequest
      * @return MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINRequest
      */
     public function getLowestOfferListingsForASIN($request)
     {
@@ -735,10 +741,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      * SellerId and SKU.
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForSKU request or MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForSKU object itself
-     * @see MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForSKURequest
      * @return MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForSKUResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForSKURequest
      */
     public function getLowestOfferListingsForSKU($request)
     {
@@ -760,10 +767,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      *     ASIN.
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASIN request or MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASIN object itself
-     * @see MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINRequest
-     * @return MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINResponse
+     * @return \MWS\Model\MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINRequest
      */
     public function getLowestPricedOffersForASIN($request)
     {
@@ -785,10 +793,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      *     SellerId and SKU.
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForSKU request or MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForSKU object itself
-     * @see MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForSKURequest
      * @return MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForSKUResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForSKURequest
      */
     public function getLowestPricedOffersForSKU($request)
     {
@@ -810,10 +819,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      * given ASIN.
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetMatchingProduct request or MarketplaceWebServiceProducts_Model_GetMatchingProduct object itself
-     * @see MarketplaceWebServiceProducts_Model_GetMatchingProductRequest
-     * @return MarketplaceWebServiceProducts_Model_GetMatchingProductResponse
+     * @return \MWS\Model\MarketplaceWebServiceProducts_Model_GetMatchingProductResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_GetMatchingProductRequest
      */
     public function getMatchingProduct($request)
     {
@@ -835,10 +845,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      * given Identifier list. Identifer type can be one of [SKU|ASIN|UPC|EAN|ISBN|GTIN|JAN]
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetMatchingProductForId request or MarketplaceWebServiceProducts_Model_GetMatchingProductForId object itself
-     * @see MarketplaceWebServiceProducts_Model_GetMatchingProductForIdRequest
      * @return MarketplaceWebServiceProducts_Model_GetMatchingProductForIdResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_GetMatchingProductForIdRequest
      */
     public function getMatchingProductForId($request)
     {
@@ -861,10 +872,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      *         ASIN/SKU list.
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetMyFeesEstimate request or MarketplaceWebServiceProducts_Model_GetMyFeesEstimate object itself
-     * @see MarketplaceWebServiceProducts_Model_GetMyFeesEstimateRequest
      * @return MarketplaceWebServiceProducts_Model_GetMyFeesEstimateResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_GetMyFeesEstimateRequest
      */
     public function getMyFeesEstimate($request)
     {
@@ -885,10 +897,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      * <!-- Wrong doc in current code -->
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetMyPriceForASIN request or MarketplaceWebServiceProducts_Model_GetMyPriceForASIN object itself
-     * @see MarketplaceWebServiceProducts_Model_GetMyPriceForASINRequest
      * @return MarketplaceWebServiceProducts_Model_GetMyPriceForASINResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_GetMyPriceForASINRequest
      */
     public function getMyPriceForASIN($request)
     {
@@ -909,10 +922,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      * <!-- Wrong doc in current code -->
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetMyPriceForSKU request or MarketplaceWebServiceProducts_Model_GetMyPriceForSKU object itself
-     * @see MarketplaceWebServiceProducts_Model_GetMyPriceForSKURequest
      * @return MarketplaceWebServiceProducts_Model_GetMyPriceForSKUResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_GetMyPriceForSKURequest
      */
     public function getMyPriceForSKU($request)
     {
@@ -934,10 +948,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      * the MarketplaceId and ASIN.
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetProductCategoriesForASIN request or MarketplaceWebServiceProducts_Model_GetProductCategoriesForASIN object itself
-     * @see MarketplaceWebServiceProducts_Model_GetProductCategoriesForASINRequest
      * @return MarketplaceWebServiceProducts_Model_GetProductCategoriesForASINResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_GetProductCategoriesForASINRequest
      */
     public function getProductCategoriesForASIN($request)
     {
@@ -959,10 +974,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      * the SellerId and SKU.
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetProductCategoriesForSKU request or MarketplaceWebServiceProducts_Model_GetProductCategoriesForSKU object itself
-     * @see MarketplaceWebServiceProducts_Model_GetProductCategoriesForSKURequest
      * @return MarketplaceWebServiceProducts_Model_GetProductCategoriesForSKUResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_GetProductCategoriesForSKURequest
      */
     public function getProductCategoriesForSKU($request)
     {
@@ -985,10 +1001,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      * All API sections within the API are required to implement this operation.
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetServiceStatus request or MarketplaceWebServiceProducts_Model_GetServiceStatus object itself
-     * @see MarketplaceWebServiceProducts_Model_GetServiceStatusRequest
      * @return MarketplaceWebServiceProducts_Model_GetServiceStatusResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_GetServiceStatusRequest
      */
     public function getServiceStatus($request)
     {
@@ -1013,10 +1030,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
      * find products that match the given criteria.
      *
      * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_ListMatchingProducts request or MarketplaceWebServiceProducts_Model_ListMatchingProducts object itself
-     * @see MarketplaceWebServiceProducts_Model_ListMatchingProductsRequest
      * @return MarketplaceWebServiceProducts_Model_ListMatchingProductsResponse
      *
      * @throws MarketplaceWebServiceProducts_Exception
+     * @throws Exception
+     * @see MarketplaceWebServiceProducts_Model_ListMatchingProductsRequest
      */
     public function listMatchingProducts($request)
     {

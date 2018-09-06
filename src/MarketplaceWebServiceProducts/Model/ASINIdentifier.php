@@ -1,4 +1,4 @@
-<?php namespace MWS\Model;
+<?php namespace MWSProducts\Model;
 
 /*******************************************************************************
  * Copyright 2009-2017 Amazon Services. All Rights Reserved.
@@ -22,7 +22,7 @@
  * @see MarketplaceWebServiceProducts_Model
  */
 
-use MWS\MarketplaceWebServiceProducts_Model;
+use MWSProducts\MarketplaceWebServiceProducts_Model;
 
 
 /**

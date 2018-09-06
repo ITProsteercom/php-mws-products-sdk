@@ -1,8 +1,9 @@
-<?php namespace MWS;
+<?php namespace MWSProducts;
 
 use DOMDocument;
 use DOMElement;
 use DOMXPath;
+use Exception;
 
 /**
  * MarketplaceWebServiceProducts_Model - base class for all model classes
@@ -17,6 +18,7 @@ abstract class MarketplaceWebServiceProducts_Model
      * Construct new model class
      *
      * @param mixed $data - DOMElement or Associative Array to construct from.
+     * @throws Exception
      */
     public function __construct($data = null)
     {

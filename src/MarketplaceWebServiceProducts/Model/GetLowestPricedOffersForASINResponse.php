@@ -1,4 +1,4 @@
-<?php namespace MWS\Model;
+<?php namespace MWSProducts\Model;
 /*******************************************************************************
  * Copyright 2009-2017 Amazon Services. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@
 
 use DOMDocument;
 use DOMXPath;
-use MWS\MarketplaceWebServiceProducts_Model;
+use MWSProducts\MarketplaceWebServiceProducts_Model;
 
 
 /**
@@ -57,7 +57,7 @@ class MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINResponse e
      * @param $xml
      *        XML string to construct from
      *
-     * @return MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINResponse
+     * @return \MWS\Model\MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINResponse|MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINResponse
      */
     public static function fromXML($xml)
     {
