@@ -406,7 +406,17 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
     {
         $queryParameters = array();
         foreach ($parameters as $key => $value) {
-            $queryParameters[] = $key . '=' . $this->_urlencode($value);
+
+            if ($key = 'ASINList') {
+                $asinIndex = 1;
+
+                foreach ($parameters[$key] as $asin) {
+                    $queryParameters[] = "ASINList.ASIN.$asinIndex=$asin";
+                }
+
+            } else {
+                $queryParameters[] = $key . '=' . $this->_urlencode($value);
+            }
         }
         return implode('&', $queryParameters);
     }
