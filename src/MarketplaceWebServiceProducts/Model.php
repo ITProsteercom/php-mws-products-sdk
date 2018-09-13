@@ -83,7 +83,8 @@ abstract class MarketplaceWebServiceProducts_Model
             } else {
                 if ($this->_isComplexType($fieldType)) {
                     if (array_key_exists($fieldName, $array)) {
-                        $this->_fields[$fieldName]['FieldValue'] = new $fieldType($array[$fieldName]);
+                        $className = "MWSProducts\Model\{$fieldType}";
+                        $this->_fields[$fieldName]['FieldValue'] = new $className($array[$fieldName]);
                     }
                 } else {
                     if (array_key_exists($fieldName, $array)) {
