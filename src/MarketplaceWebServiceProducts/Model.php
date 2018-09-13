@@ -1,8 +1,6 @@
 <?php namespace MWSProducts;
 
 use DOMDocument;
-use DOMElement;
-use DOMXPath;
 use Exception;
 
 /**
@@ -83,7 +81,7 @@ abstract class MarketplaceWebServiceProducts_Model
             } else {
                 if ($this->_isComplexType($fieldType)) {
                     if (array_key_exists($fieldName, $array)) {
-                        $className = "MWSProducts\Model\{$fieldType}";
+                        $className = "MWSProducts\Model\\" . $fieldType;
                         $this->_fields[$fieldName]['FieldValue'] = new $className($array[$fieldName]);
                     }
                 } else {
@@ -103,7 +101,7 @@ abstract class MarketplaceWebServiceProducts_Model
      */
     private function _isComplexType($fieldType)
     {
-        return preg_match("/^MarketplaceWebServiceProducts_/", $fieldType);
+        return preg_match(" /^MarketplaceWebServiceProducts_ / ", $fieldType);
     }
 
     /**
@@ -161,7 +159,7 @@ abstract class MarketplaceWebServiceProducts_Model
                 } else if ($this->_isComplexType($fieldType[0])) {
                     if (isset($field['ListMemberName'])) {
                         $memberName = $field['ListMemberName'];
-                        $elements = $xpath->query("./*[local-name()='$fieldName']/*[local-name()='$memberName']", $dom);
+                        $elements = $xpath->query(" ./*[local-name()='$fieldName']/*[local-name()='$memberName']", $dom);
                     } else {
                         $elements = $xpath->query("./*[local-name()='$fieldName']", $dom);
                     }
@@ -240,10 +238,10 @@ abstract class MarketplaceWebServiceProducts_Model
      * @return
      */
     public function __get($propertyName)
-    {
-        $getter = "get$propertyName";
-        return $this->$getter();
-    }
+                        {
+                            $getter = "get$propertyName";
+                            return $this->$getter();
+                        }
 
     /**
      * Support for virtual properties setters.
@@ -261,69 +259,69 @@ abstract class MarketplaceWebServiceProducts_Model
      * @return MarketplaceWebServiceProducts_Model
      */
     public function __set($propertyName, $propertyValue)
-    {
-        $setter = "set$propertyName";
-        $this->$setter($propertyValue);
-        return $this;
-    }
+                        {
+                            $setter = "set$propertyName";
+                            $this->$setter($propertyValue);
+                            return $this;
+                        }
 
     /**
      * Convert to query parameters suitable for POSTing.
      * @return array of query parameters
      */
     public function toQueryParameterArray()
-    {
-        return $this->_toQueryParameterArray("");
-    }
+                        {
+                            return $this->_toQueryParameterArray("");
+                        }
 
     protected function _toQueryParameterArray($prefix)
-    {
-        $arr = array();
-        foreach ($this->_fields as $fieldName => $fieldAttrs) {
-            $fieldType = $fieldAttrs['FieldType'];
-            $fieldValue = $fieldAttrs['FieldValue'];
-            $newPrefix = $prefix . $fieldName . '.';
-            $currentArr = $this->__toQueryParameterArray($newPrefix, $fieldType, $fieldValue, $fieldAttrs);
-            $arr = array_merge($arr, $currentArr);
-        }
-        return $arr;
-    }
+                        {
+                            $arr = array();
+                            foreach ($this->_fields as $fieldName => $fieldAttrs) {
+                                $fieldType = $fieldAttrs['FieldType'];
+                                $fieldValue = $fieldAttrs['FieldValue'];
+                                $newPrefix = $prefix . $fieldName . '.';
+                                $currentArr = $this->__toQueryParameterArray($newPrefix, $fieldType, $fieldValue, $fieldAttrs);
+                                $arr = array_merge($arr, $currentArr);
+                            }
+                            return $arr;
+                        }
 
     private function __toQueryParameterArray($prefix, $fieldType, $fieldValue, $fieldAttrs)
-    {
-        $arr = array();
-        if (is_array($fieldType)) {
-            if (isset($fieldAttrs['ListMemberName'])) {
-                $listMemberName = $fieldAttrs['ListMemberName'];
-                $itemPrefix = $prefix . $listMemberName . '.';
-            } else {
-                $itemPrefix = $prefix;
-            }
+                        {
+                            $arr = array();
+                            if (is_array($fieldType)) {
+                                if (isset($fieldAttrs['ListMemberName'])) {
+                                    $listMemberName = $fieldAttrs['ListMemberName'];
+                                    $itemPrefix = $prefix . $listMemberName . '.';
+                                } else {
+                                    $itemPrefix = $prefix;
+                                }
 
-            for ($i = 1; $i <= count($fieldValue); $i++) {
-                $indexedPrefix = $itemPrefix . $i . '.';
-                $memberType = $fieldType[0];
-                $arr = array_merge($arr,
-                    $this->__toQueryParameterArray($indexedPrefix,
-                        $memberType, $fieldValue[$i - 1], null));
-            }
+                                for ($i = 1; $i <= count($fieldValue); $i++) {
+                                    $indexedPrefix = $itemPrefix . $i . '.';
+                                    $memberType = $fieldType[0];
+                                    $arr = array_merge($arr,
+                                        $this->__toQueryParameterArray($indexedPrefix,
+                                            $memberType, $fieldValue[$i - 1], null));
+                                }
 
-        } else if ($this->_isComplexType($fieldType)) {
-            // Struct
-            if (isset($fieldValue)) {
-                $arr = array_merge($arr, $fieldValue->_toQueryParameterArray($prefix));
-            }
-        } else {
-            // Primitive
-            if ($fieldValue !== null && $fieldValue !== "") {
-                if ($fieldType == 'bool') {
-                    $fieldValue = ($fieldValue) ? 'true' : 'false';
-                }
-                $arr[rtrim($prefix, '.')] = $fieldValue;
-            }
-        }
-        return $arr;
-    }
+                            } else if ($this->_isComplexType($fieldType)) {
+                                // Struct
+                                if (isset($fieldValue)) {
+                                    $arr = array_merge($arr, $fieldValue->_toQueryParameterArray($prefix));
+                                }
+                            } else {
+                                // Primitive
+                                if ($fieldValue !== null && $fieldValue !== "") {
+                                    if ($fieldType == 'bool') {
+                                        $fieldValue = ($fieldValue) ? 'true' : 'false';
+                                    }
+                                    $arr[rtrim($prefix, '.')] = $fieldValue;
+                                }
+                            }
+                            return $arr;
+                        }
 
     /**
      * XML fragment representation of this object
@@ -332,78 +330,78 @@ abstract class MarketplaceWebServiceProducts_Model
      * @return string XML fragment for this object
      */
     protected function _toXMLFragment()
-    {
-        $xml = "";
-        foreach ($this->_fields as $fieldName => $field) {
-            $fieldValue = $field['FieldValue'];
-            if (!is_null($fieldValue) && $field['FieldType'] != "MarketplaceWebServiceProducts_Model_ResponseHeaderMetadata") {
-                $fieldType = $field['FieldType'];
-                if (is_array($fieldType)) {
-                    if ($fieldType[0] == "object") {
-                        foreach ($fieldValue as $item) {
-                            $newDoc = new DOMDocument();
-                            $importedNode = $newDoc->importNode($item, true);
-                            $newDoc->appendChild($importedNode);
-                            $xmlStr = $newDoc->saveXML();
-                            $xmlStr = substr($xmlStr, strpos($xmlStr, "?>") + 2);
-                            $xml .= trim($xmlStr);
+                        {
+                            $xml = "";
+                            foreach ($this->_fields as $fieldName => $field) {
+                                $fieldValue = $field['FieldValue'];
+                                if (!is_null($fieldValue) && $field['FieldType'] != "MarketplaceWebServiceProducts_Model_ResponseHeaderMetadata") {
+                                    $fieldType = $field['FieldType'];
+                                    if (is_array($fieldType)) {
+                                        if ($fieldType[0] == "object") {
+                                            foreach ($fieldValue as $item) {
+                                                $newDoc = new DOMDocument();
+                                                $importedNode = $newDoc->importNode($item, true);
+                                                $newDoc->appendChild($importedNode);
+                                                $xmlStr = $newDoc->saveXML();
+                                                $xmlStr = substr($xmlStr, strpos($xmlStr, "?>") + 2);
+                                                $xml .= trim($xmlStr);
+                                            }
+                                        } else if ($this->_isComplexType($fieldType[0])) {
+                                            if (isset($field['ListMemberName'])) {
+                                                $memberName = $field['ListMemberName'];
+                                                $xml .= "<$fieldName>";
+                                                foreach ($fieldValue as $item) {
+                                                    $xml .= "<$memberName>";
+                                                    $xml .= $item->_toXMLFragment();
+                                                    $xml .= "</$memberName>";
+                                                }
+                                                $xml .= "</$fieldName>";
+                                            } else {
+                                                foreach ($fieldValue as $item) {
+                                                    $xml .= "<$fieldName";
+                                                    $xml .= $item->_getAttributes();
+                                                    $xml .= ">";
+                                                    $xml .= $item->_toXMLFragment();
+                                                    $xml .= "</$fieldName>";
+                                                }
+                                            }
+                                        } else {
+                                            if (isset($field['ListMemberName'])) {
+                                                $memberName = $field['ListMemberName'];
+                                                $xml .= "<$fieldName>";
+                                                foreach ($fieldValue as $item) {
+                                                    $xml .= "<$memberName>";
+                                                    $xml .= $this->_escapeXML($item);
+                                                    $xml .= "</$memberName>";
+                                                }
+                                                $xml .= "</$fieldName>";
+                                            } else {
+                                                foreach ($fieldValue as $item) {
+                                                    $xml .= "<$fieldName>";
+                                                    $xml .= $this->_escapeXML($item);
+                                                    $xml .= "</$fieldName>";
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        if ($this->_isComplexType($fieldType)) {
+                                            $xml .= "<$fieldName";
+                                            $xml .= $fieldValue->_getAttributes();
+                                            $xml .= ">";
+                                            $xml .= $fieldValue->_toXMLFragment();
+                                            $xml .= "</$fieldName>";
+                                        } else if ($fieldType[0] == ".") {
+                                            $xml .= $this->_escapeXML($fieldValue);
+                                        } else if ($fieldType[0] != "@") {
+                                            $xml .= "<$fieldName>";
+                                            $xml .= $this->_escapeXML($fieldValue);
+                                            $xml .= "</$fieldName>";
+                                        }
+                                    }
+                                }
+                            }
+                            return $xml;
                         }
-                    } else if ($this->_isComplexType($fieldType[0])) {
-                        if (isset($field['ListMemberName'])) {
-                            $memberName = $field['ListMemberName'];
-                            $xml .= "<$fieldName>";
-                            foreach ($fieldValue as $item) {
-                                $xml .= "<$memberName>";
-                                $xml .= $item->_toXMLFragment();
-                                $xml .= "</$memberName>";
-                            }
-                            $xml .= "</$fieldName>";
-                        } else {
-                            foreach ($fieldValue as $item) {
-                                $xml .= "<$fieldName";
-                                $xml .= $item->_getAttributes();
-                                $xml .= ">";
-                                $xml .= $item->_toXMLFragment();
-                                $xml .= "</$fieldName>";
-                            }
-                        }
-                    } else {
-                        if (isset($field['ListMemberName'])) {
-                            $memberName = $field['ListMemberName'];
-                            $xml .= "<$fieldName>";
-                            foreach ($fieldValue as $item) {
-                                $xml .= "<$memberName>";
-                                $xml .= $this->_escapeXML($item);
-                                $xml .= "</$memberName>";
-                            }
-                            $xml .= "</$fieldName>";
-                        } else {
-                            foreach ($fieldValue as $item) {
-                                $xml .= "<$fieldName>";
-                                $xml .= $this->_escapeXML($item);
-                                $xml .= "</$fieldName>";
-                            }
-                        }
-                    }
-                } else {
-                    if ($this->_isComplexType($fieldType)) {
-                        $xml .= "<$fieldName";
-                        $xml .= $fieldValue->_getAttributes();
-                        $xml .= ">";
-                        $xml .= $fieldValue->_toXMLFragment();
-                        $xml .= "</$fieldName>";
-                    } else if ($fieldType[0] == ".") {
-                        $xml .= $this->_escapeXML($fieldValue);
-                    } else if ($fieldType[0] != "@") {
-                        $xml .= "<$fieldName>";
-                        $xml .= $this->_escapeXML($fieldValue);
-                        $xml .= "</$fieldName>";
-                    }
-                }
-            }
-        }
-        return $xml;
-    }
 
     /**
      * Escape special XML characters
@@ -411,25 +409,25 @@ abstract class MarketplaceWebServiceProducts_Model
      * @return string with escaped XML characters
      */
     private function _escapeXML($str)
-    {
-        $from = array("&", "<", ">", "'", "\"");
-        $to = array("&amp;", "&lt;", "&gt;", "&#039;", "&quot;");
-        return str_replace($from, $to, $str);
-    }
+                        {
+                            $from = array("&", "<", ">", "'", "\"");
+                            $to = array("&amp;", "&lt;", "&gt;", "&#039;", "&quot;");
+                            return str_replace($from, $to, $str);
+                        }
 
     protected function _getAttributes()
-    {
-        $xml = "";
-        foreach ($this->_fields as $fieldName => $field) {
-            $fieldValue = $field['FieldValue'];
-            if (!is_null($fieldValue)) {
-                $fieldType = $field['FieldType'];
-                if ($fieldType[0] == "@") {
-                    $xml .= " " . $fieldName . "='" . $this->_escapeXML($fieldValue) . "'";
-                }
-            }
-        }
-        return $xml;
-    }
+                        {
+                            $xml = "";
+                            foreach ($this->_fields as $fieldName => $field) {
+                                $fieldValue = $field['FieldValue'];
+                                if (!is_null($fieldValue)) {
+                                    $fieldType = $field['FieldType'];
+                                    if ($fieldType[0] == "@") {
+                                        $xml .= " " . $fieldName . "='" . $this->_escapeXML($fieldValue) . "'";
+                                    }
+                                }
+                            }
+                            return $xml;
+                        }
 
 }
