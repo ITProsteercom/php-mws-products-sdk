@@ -407,7 +407,7 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
         $queryParameters = array();
         foreach ($parameters as $key => $value) {
 
-            if ($key = 'ASINList') {
+            if ($key == 'ASINList') {
                 $asinIndex = 1;
 
                 foreach ($parameters[$key] as $asin) {
