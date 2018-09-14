@@ -850,7 +850,7 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
 
         $response = MarketplaceWebServiceProducts_Model_GetMatchingProductResponse::fromXML($httpResponse['ResponseBody']);
         $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
-        return $response;
+        return str_replace('ns2:', '', $httpResponse['ResponseBody']);
     }
 
     /**
