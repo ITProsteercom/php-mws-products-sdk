@@ -848,6 +848,8 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
         $parameters['Action'] = 'GetMatchingProduct';
         $httpResponse = $this->_invoke($parameters);
 
+        // @ToDo : Replace `ns2:` from the ResponseBody before passing in the response model
+
         $response = MarketplaceWebServiceProducts_Model_GetMatchingProductResponse::fromXML($httpResponse['ResponseBody']);
         $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
         return str_replace('ns2:', '', $httpResponse['ResponseBody']);
