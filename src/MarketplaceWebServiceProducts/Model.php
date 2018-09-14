@@ -3,6 +3,7 @@
 use DOMDocument;
 use DOMElement;
 use Exception;
+use DOMXPath;
 
 /**
  * MarketplaceWebServiceProducts_Model - base class for all model classes
