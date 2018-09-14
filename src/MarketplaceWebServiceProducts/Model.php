@@ -1,6 +1,7 @@
 <?php namespace MWSProducts;
 
 use DOMDocument;
+use DOMElement;
 use Exception;
 
 /**
