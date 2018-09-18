@@ -396,7 +396,7 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
         $endpoint = parse_url($this->_config['ServiceURL']);
         $data .= $endpoint['host'];
         $data .= "\n";
-        $uri = array_key_exists('path', $endpoint) ? $endpoint['path'] : null;
+        $uri = array_key_exists('path', $endpoint) ? str_replace('//', '/', $endpoint['path']) : null;
         if (!isset ($uri)) {
             $uri = "/";
         }
