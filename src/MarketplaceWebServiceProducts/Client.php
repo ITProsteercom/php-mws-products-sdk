@@ -374,11 +374,12 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
     }
 
     /**
-     * @param null $data
+     * @param null|string $data
+     * @return mixed
      */
     private function _removeNs2($data = null)
     {
-        str_replace('ns2:', '', $data);
+        return str_replace('ns2:', '', $data);
     }
 
     /**
