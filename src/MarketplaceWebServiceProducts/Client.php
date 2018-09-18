@@ -280,10 +280,9 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
             $retries = 0;
             for (; ;) {
                 $response = $this->_httpPost($parameters);
-                $this->_removeNs2($response);
                 $status = $response['Status'];
                 if ($status == 200) {
-                    return array('ResponseBody' => $response['ResponseBody'],
+                    return array('ResponseBody' => $this->_removeNs2($response['ResponseBody']),
                         'ResponseHeaderMetadata' => $response['ResponseHeaderMetadata']);
                 }
                 if ($status == 500 && $this->_pauseOnRetry(++$retries)) {
@@ -375,13 +374,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
     }
 
     /**
-     * @param $response
+     * @param null $data
      */
-    private function _removeNs2(&$response)
+    private function _removeNs2($data = null)
     {
-        if (array_key_exists('ResponseBody', $response)) {
-            $response['ResponseBody'] = str_replace('ns2:', '', $response['ResponseBody']);
-        }
+        str_replace('ns2:', '', $data);
     }
 
     /**
