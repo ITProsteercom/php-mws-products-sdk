@@ -280,6 +280,7 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
             $retries = 0;
             for (; ;) {
                 $response = $this->_httpPost($parameters);
+                $this->_removeNs2($response);
                 $status = $response['Status'];
                 if ($status == 200) {
                     return array('ResponseBody' => $response['ResponseBody'],
@@ -374,6 +375,16 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
     }
 
     /**
+     * @param $response
+     */
+    private function _removeNs2(&$response)
+    {
+        if (array_key_exists('ResponseBody', $response)) {
+            $response['ResponseBody'] = str_replace('ns2:', '', $response['ResponseBody']);
+        }
+    }
+
+    /**
      * Calculate String to Sign for SignatureVersion 2
      * @param array $parameters request parameters
      * @return String to Sign
@@ -407,11 +418,11 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
         $queryParameters = array();
         foreach ($parameters as $key => $value) {
 
-            if ($key == 'ASINList') {
+            if (in_array($key, ['ASINList', 'IdList'])) {
                 $asinIndex = 1;
 
                 foreach ($parameters[$key] as $asin) {
-                    $queryParameters[] = "ASINList.ASIN.$asinIndex=$asin";
+                    $queryParameters[] = "$key.ASIN.$asinIndex=$asin";
                 }
 
             } else {
@@ -848,11 +859,9 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
         $parameters['Action'] = 'GetMatchingProduct';
         $httpResponse = $this->_invoke($parameters);
 
-        // @ToDo : Replace `ns2:` from the ResponseBody before passing in the response model
-
         $response = MarketplaceWebServiceProducts_Model_GetMatchingProductResponse::fromXML($httpResponse['ResponseBody']);
         $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
-        return str_replace('ns2:', '', $httpResponse['ResponseBody']);
+        return $response;
     }
 
     /**
