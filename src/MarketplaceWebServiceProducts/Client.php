@@ -421,8 +421,13 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
             if (in_array($key, ['ASINList', 'IdList'])) {
                 $asinIndex = 1;
 
+                $type = [
+                    'ASINList' => 'ASINList.ASIN',
+                    'IdList' => 'IdList.Id'
+                ];
+
                 foreach ($parameters[$key] as $asin) {
-                    $queryParameters[] = "$key.ASIN.$asinIndex=$asin";
+                    $queryParameters[] = "{$type[$key]}.$asinIndex=$asin";
                 }
 
             } else {
